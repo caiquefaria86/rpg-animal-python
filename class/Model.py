@@ -20,6 +20,17 @@ class Model:
         else:
             return False
 
+
+    def getNovoId(self, endpoint):
+        url = self.urlBase + endpoint
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            qtd = len(data)
+            return qtd+1
+        else:
+            print(f"Erro ao consultar o servidor: {response.status_code}")
+
         # response = requests.get(url)
 
         # if response.status_code == 200:

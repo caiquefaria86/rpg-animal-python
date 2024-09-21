@@ -71,15 +71,39 @@ class Jogo:
                 print(f"O personagem {atacante.nome} ganhou")
 
     def menuIniciarJogo(self):
-        print("Jogo iniciado")
-        print('Se você deseja cadastrar um novo personagem ou ambiente digite 1')
-        print('Iniciar partida, digite 2')
-        escolha = int(input())
-        if escolha == 1:
-            print('Para cadastrar um novo personagem digite 1')
-            print('Para cadastrar um novo ambiente digite 2')
-            escolha2 = int(input())
-            if escolha2 == 1:
-                self.cadastrarPersonagem(self)
+        jogoFinalizado = False
+        while jogoFinalizado == False:
+            print("Menu Principal do Jogo ")
+            print('Se você deseja cadastrar um novo personagem ou ambiente digite 1')
+            print('Iniciar partida, digite 2')
+            escolha = int(input())
+            if escolha == 1:
+                self.chamaMenuCadastrarItens(escolha)
+            elif escolha == 2:
+                personagem1 = animal.Animal('Leão', 1000, 400, 200, 5, 'vivo', 'Felino', 'Anda', 'Savana', 15)
+                personagem2 = animal.Animal('Tigre', 1200, 350, 200, 7, 'vivo', 'Felino', 'Anda', 'Selva', 22)
+                self.definePersonagem(personagem1, personagem2)
+                self.iniciarJogo()
             else:
-                ambiente.Ambiente.cadastrarAmbiente(self)
+                print("opção Inválida")
+        
+
+    def chamaMenuCadastrarItens(self, escolha):
+        print('Para cadastrar um novo personagem digite 1')
+        print('Para cadastrar um novo ambiente digite 2')
+        escolha2 = int(input())
+        if escolha2 == 1:
+            if animal.Animal.cadastrarAnimal(self):
+                return True
+            else:
+                return False
+            
+        elif escolha2 == 2:
+            if ambiente.Ambiente.cadastrarAmbiente(self):
+                return True
+            else:
+                return False
+        else:
+            print("Opção inválida")
+        
+
